@@ -17,8 +17,13 @@ func main() {
 		if err != nil {
 			return err
 		}
+		status, err := gitStatus(paths)
+		if err != nil {
+			return err
+		}
 
-		for _, v := range paths {
+		for k, v := range status {
+			fmt.Println(paths[k])
 			fmt.Println(v)
 		}
 
@@ -42,4 +47,20 @@ func repoPaths() ([]string, error) {
 	}
 
 	return lines, nil
+}
+
+func gitStatus(paths []string) ([]string, error) {
+	status := make([]string, 0, 100)
+	for _, v := range paths {
+		err := os.Chdir(v)
+		if err != nil {
+			return nil, err
+		}
+		out, err := exec.Command("git", "status").Output()
+		if err != nil {
+			return nil, err
+		}
+		status = append(status, string(out))
+	}
+	return status, nil
 }
