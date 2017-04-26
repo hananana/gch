@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"github.com/mitchellh/colorstring"
 	"github.com/urfave/cli"
 	"os"
 	"os/exec"
@@ -23,7 +24,8 @@ func main() {
 		}
 
 		for k, v := range status {
-			fmt.Println(paths[k])
+			fmt.Println(colorstring.Color("[green]" + paths[k]))
+			// 			fmt.Println(colorstring.paths[k])
 			fmt.Println(v)
 		}
 
