@@ -23,10 +23,9 @@ func main() {
 			return err
 		}
 
-		for k, v := range status {
-			fmt.Println(colorstring.Color("[green]" + paths[k]))
-			// 			fmt.Println(colorstring.paths[k])
-			fmt.Println(v)
+		err = outPut(paths, status)
+		if err != nil {
+			return err
 		}
 
 		return nil
@@ -65,4 +64,12 @@ func gitStatus(paths []string) ([]string, error) {
 		status = append(status, string(out))
 	}
 	return status, nil
+}
+
+func outPut(paths []string, status []string) error {
+	for k, v := range status {
+		fmt.Println(colorstring.Color("[green]" + paths[k]))
+		fmt.Println(v)
+	}
+	return nil
 }
