@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/mitchellh/colorstring"
 	"github.com/urfave/cli"
+	"gopkg.in/kyokomi/emoji.v1"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -68,8 +69,24 @@ func gitStatus(paths []string) ([]string, error) {
 
 func outPut(paths []string, status []string) error {
 	for k, v := range status {
-		fmt.Println(colorstring.Color("[green]" + paths[k]))
-		fmt.Println(v)
+		path := paths[k]
+		if isOk(v) {
+			fmt.Println(colorstring.Color("[blue]" + path + "[reset]" + emoji.Sprint(" ok!:sparkles:")))
+		} else {
+			fmt.Println(colorstring.Color("[yellow]" + path + "[reset]" + emoji.Sprint(" check me!:pig:")))
+		}
 	}
 	return nil
+}
+
+func isOk(status string) bool {
+	return isUpToDate(status) && isNoDiff(status)
+}
+
+func isUpToDate(status string) bool {
+	return strings.Index(status, "up-to-date") >= 0
+}
+
+func isNoDiff(status string) bool {
+	return strings.Index(status, "nothing") >= 0
 }
