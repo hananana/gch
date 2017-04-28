@@ -48,6 +48,13 @@ func repoPaths() ([]string, error) {
 		lines = append(lines, path)
 	}
 
+	dotPath := os.Getenv("HOME")
+	dotPath = filepath.Join(dotPath, ".dotfiles")
+	_, err = os.Stat(dotPath)
+	if err == nil {
+		lines = append(lines, dotPath)
+	}
+
 	return lines, nil
 }
 
