@@ -87,11 +87,19 @@ func outPut(paths []string, status []string) error {
 }
 
 func isOk(status string) bool {
-	return isUpToDate(status) && isNoDiff(status)
+	return isClean(status)
+}
+
+func isClean(status string) bool {
+	return strings.Index(status, "clean") >= 0
 }
 
 func isUpToDate(status string) bool {
 	return strings.Index(status, "up-to-date") >= 0
+}
+
+func isUntrackedFiles(status string) bool {
+	return strings.Index(status, "untracked") >= 0
 }
 
 func isNoDiff(status string) bool {
