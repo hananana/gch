@@ -91,15 +91,15 @@ func isOk(status string) bool {
 }
 
 func isClean(status string) bool {
-	return strings.Index(status, "clean") >= 0
+	return strings.Index(status, "working tree clean") >= 0
+}
+
+func isPushed(status string) bool {
+	return strings.Index(status, "branch is ahead of") != -1
 }
 
 func isUpToDate(status string) bool {
 	return strings.Index(status, "up-to-date") >= 0
-}
-
-func isUntrackedFiles(status string) bool {
-	return strings.Index(status, "untracked") >= 0
 }
 
 func isNoDiff(status string) bool {
