@@ -87,7 +87,7 @@ func outPut(paths []string, status []string) error {
 }
 
 func isOk(status string) bool {
-	return isClean(status)
+	return isClean(status) && isPushed(status)
 }
 
 func isClean(status string) bool {
@@ -95,7 +95,7 @@ func isClean(status string) bool {
 }
 
 func isPushed(status string) bool {
-	return strings.Index(status, "branch is ahead of") != -1
+	return strings.Index(status, "branch is ahead of") == -1
 }
 
 func isUpToDate(status string) bool {
