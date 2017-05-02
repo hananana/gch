@@ -2,11 +2,13 @@
 
 ## IDEA
 
-- commitしたけどpushし忘れを防止する
+- commitを忘れる
+- commitしたけどpushを忘れる
+
+そんなうっかりさんのためのツール
 
 ## REQUIREMENTS
 
-- go
 - ghq
 - git
 
@@ -21,8 +23,8 @@ $ gch
 ## HOW TO BUILD
 
 ```
-$ go get github.com/hananana/gch
+$ ghq get hananana/gch
 $ cd $GOPATH/src/github.com/hananana/gch
-$ dep ensure
+$ glide install
 $ go build
 ```
