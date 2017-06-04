@@ -55,6 +55,12 @@ func repoPaths() ([]string, error) {
 		lines = append(lines, dotPath)
 	}
 
+	preztoPath := filepath.Join(os.Getenv("HOME"), ".zprezto")
+	_, err = os.Stat(preztoPath)
+	if err == nil {
+		lines = append(lines, preztoPath)
+	}
+
 	return lines, nil
 }
 
